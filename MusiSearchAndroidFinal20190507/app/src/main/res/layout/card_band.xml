@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:layout_marginStart="@dimen/padding_status"
+    android:layout_marginTop="@dimen/padding_status"
+    android:layout_marginEnd="@dimen/padding_status"
+    android:background="?android:selectableItemBackground"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:focusable="true">
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="@dimen/padding_status"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_profile"
+        app:civ_border_color="#EEEEEE"
+        app:civ_border_width="0dp"
+        android:layout_marginEnd="@dimen/padding_status"
+        app:civ_shadow="false"
+        app:civ_shadow_color="#5f5f5f"
+        app:civ_shadow_radius="5" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imageProfile"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Dimas Aprizawandi"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/textNameStatus" />
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textName"
+        android:layout_toEndOf="@id/imageProfile"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/selasa_17_desember_2017"
+        android:textColor="@color/colorWhite80"
+        android:textSize="@dimen/textDateStatus" />
+
+    <TextView
+        android:id="@+id/textTime"
+        android:visibility="gone"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textName"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/_2_40_pm"
+        android:textColor="@color/colorWhite80"
+        android:textSize="@dimen/textDateStatus" />
+
+    <View
+        android:layout_below="@id/imageProfile"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/padding_status"
+        android:background="@drawable/ic_bottom_shadow" />
+
+</RelativeLayout>

@@ -1,0 +1,129 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Detail Region</title>
+</head>
+<body>
+	<section layout:fragment="header">
+		<h1 id="header_h1">Region</h1>
+		
+	</section>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-12">
+				<div style="margin-bottom: 10px;">
+					<button type="button" class="btn btn-warning btn-sm btn-flat"
+						id="btnBack" onclick='javascript:window.history.back()'>
+						<i class="fa fa-arrow-left"></i> Back
+					</button>
+					<button class="btn btn-primary btn-flat btn-sm"
+						onclick="updateGenre()" id="btnSave">
+						<i class="fa fa-paper-plane"></i> Save
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title">Detail Region</h3>
+			</div>
+
+			<div class="row">
+				
+				<!-- <div class="loader"></div> -->
+				<div class="col-md-8">
+					<input type="hidden" id="idUser" th:value="${idUser}" />
+					<form data-toggle="validator" role="form" th:object="${region}" th:action="@{/api/region/update}"
+						class="form-horizontal" method="post">
+						<div class="box-body">
+							<input type="hidden" th:field="${region.object.id}" />
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Name</label>
+								<div class="col-sm-6 text-left">
+									<input type="text" th:field="${region.object.nama}"
+										placeholder="Name" class="form-control"
+										th:required="required" />
+								</div>
+								<div class="help-block with-errors"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Created By</label>
+								<div class="col-sm-6 text-left">
+									<input type="text"
+										th:field="${region.object.createdByName}"
+										placeholder="Created By Name" class="form-control" disabled=""/>
+								</div>
+								<div class="help-block with-errors"></div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Modified By</label>
+								<div class="col-sm-6 text-left">
+									<input type="text" th:field="${region.object.modifiedByName}"
+										placeholder="Modified By Name" class="form-control"
+										th:required="required" disabled=""/>
+								</div>
+								<div class="help-block with-errors"></div>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<script type="text/javascript">
+					//<![CDATA[
+					const urlParams = new URLSearchParams(window.location.search);
+					const inRegionId = urlParams.get('inRegionId');
+					const isEdit = urlParams.get('isEdit');
+					var urlPage = urlGlobal;
+					if (isEdit == 0){
+						document.getElementById("header_h1").innerHTML="Detail Region";
+						document.getElementById("object.nama").disabled = true;
+						document.getElementById("btnSave").style.display = 'none';
+					}else{
+						document.getElementById("header_h1").innerHTML="Edit Region";
+					}
+					function updateGenre(){
+				    	var data;
+				    	var inNama,inId;
+				    	data = {
+				    			inNama : document.getElementById('object.nama').value,
+				    			inId : inRegionId
+				    	};
+				    	$
+				    		.ajax({
+				    			type: "POST",
+				    			cache: false,
+				    			url: urlPage + "api/region/update",
+				    			dataType: "JSON",
+				    			data: data,
+				    		beforeSend: function() {
+				    				$('.loader').fadeIn();
+				    			},
+				    			complete: function() {
+				    				$('.loader').fadeOut();
+				    			},   
+				    			success: function(data)  {
+				    				if (data.errorResult == false) {
+				    					window.location.replace(urlPage + "/api/region/list?pageNumber=1");
+				    				} else {
+				    					$('.loader').fadeOut();
+				    				}
+				    			},
+					    		error : function(e) {
+									alert("ERROR: ", e);
+									console.log("ERROR: ", e);
+					    		}
+				   		});
+					}
+					// ]]>
+				</script>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

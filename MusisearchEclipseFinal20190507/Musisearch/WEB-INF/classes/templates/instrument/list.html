@@ -1,0 +1,347 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+
+<head>
+<title>Instrument List</title>
+</head>
+<body>
+	<section layout:fragment="header">
+		
+		<h1 id="header_h1">Instrument List</h1>
+
+	</section>
+	<div layout:fragment="content">
+		<div class="modal in" id="confirmModal">
+          <div class="modal-dialog confirmModal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">x</span></button>
+                <h4 class="modal-title">Konfirmasi</h4>
+              </div>
+              <div class="modal-body">
+                <p>Pastikan data sudah benar, karena transaksi tidak dapat dibatalkan. Apakah Anda yakin untuk melanjutkan proses ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat btn-sm pull-left" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary btn-flat btn-sm pull-left" id="btnOk">Ok</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+    	</div>
+		<div class="loader"></div>
+		<div class="box box-primary">
+		<script type="text/javascript">
+			//<![CDATA[
+			var urlPage = urlGlobal;	
+			var page = 1;
+			var totalPage;
+			var search = "";
+			
+			var idInstrument;
+			
+			function prevPage() {
+				if (page > 1) {
+					page = page - 1;
+					$('#currentPage').prop('disabled', true);
+					$('#currentPage').val(page);
+					refreshPage();
+				}
+			}
+			function nextPage() {
+				if (page < totalPage) {
+					page = page + 1;
+					console.log("page < totalPage === " + page);
+					$('#currentPage').prop('disabled', true);
+					$('#currentPage').val(page);
+					refreshPage();
+				}
+			}
+			
+			function disableAction() {
+				page = 0;
+				totalPage = 0;
+				$('#totalPage').text(" / " + totalPage);
+				$('#currentPage').val(page);
+				$('#currentPage').prop('disabled', true);
+				$('#btnPrevPage').prop('disabled', true);
+				$('#btnNextPage').prop('disabled', true);
+			}
+			
+			function details(inInstrumentId,isEdit) {
+				window.location = urlPage + "api/instrument/form?inInstrumentId="+inInstrumentId+"&isEdit="+isEdit;
+			}
+			
+			function deleteConfirmation(_idRegion) {
+				idInstrument = _idRegion;
+				$('#confirmModal').modal('show');
+			}
+			
+			$('#btnOk', '#confirmModal').click(function() {
+				$('#confirmModal').modal('hide');
+				deleteGenre();
+			});
+			
+			function deleteGenre(){
+		    	var instrument = new Object();
+		    	instrument.id = idInstrument;
+				var postData = JSON.stringify(instrument);
+		    	var data;
+		    	var inNama, inId;
+		    	
+		    	$
+		    		.ajax({
+		    			type: "POST",
+		    			cache: false,
+		    			url: urlPage + "api/instrument/rest/delete",
+		    			dataType: "JSON",
+		    			data: postData,
+		    			headers : {
+							"Content-Type" : "application/json",
+						},
+		    			beforeSend: function() {
+		    				$('.loader').fadeIn();
+		    			},
+		    			complete: function() {
+		    				$('.loader').fadeOut();
+		    			},   
+		    			success: function(data)  {
+		    				if (data.errorResult == false) {
+		    					window.location.replace(urlPage + "/api/instrument/list?pageNumber=1");
+		    					//javascript:window.history.back();
+		    				} else {
+		    					$('.loader').fadeOut();
+		    				}
+		    			},
+			    		error : function(e) {
+							alert("ERROR: ", e);
+							console.log("ERROR: ", e);
+			    		}
+		   		});
+			}
+
+			function refreshPage() {
+				var data;
+				data = {
+					pageNumber : page,
+					inNama : search,
+					idId : idInstrument
+				};
+				$
+						.ajax({
+							type : "GET",
+							url : urlPage + "api/instrument/rest/page",
+							dataType : "JSON",
+							data : data,
+							beforeSend : function() {
+								$('.table tbody').html("");
+								$('.loader').fadeIn();
+							},
+							complete : function() {
+								//destroy load event
+								$('.loader').fadeOut();
+							},
+							success : function(data) {
+								if (data.errorResult == false) {
+									if ((data.integerResult != null)
+											&& (data.integerResult > 0)) {
+										totalPage = parseInt(data.integerResult);
+										$('#totalPage').html(
+												"&nbsp;/ " + totalPage);
+										$('#currentPage').val(page);
+										$('#currentPage').prop(
+												'disabled',
+												page == totalPage ? true
+														: false);
+										if (page == 1)
+											$('#btnPrevPage').prop('disabled',
+													true);
+										else
+											$('#btnPrevPage').prop('disabled',
+													false);
+
+										if (page == totalPage)
+											$('#btnNextPage').prop('disabled',
+													true);
+										else
+											$('#btnNextPage').prop('disabled',
+													false);
+										$.each(data.lstObject, function(index) {
+											var result = data.lstObject[index];
+											var assetRow = '<tr>' + '<td>'
+													+ result.id 
+													+ '</td>' + '<td>'
+													+ result.nama
+													+ '</td>' + '<td>'
+													+ result.createdByName
+													+ '</td>' + '<td>'
+													+ result.createdDate
+													+ '</td>' + '<td>'
+													+ result.modifiedByName 
+													+ '</td>' + '<td>' 
+													+ result.modifiedDate
+													+ '</td>';
+													assetRow 
+													+= '<td> '
+															+ "<a class=\"btn btn-primary btn-sm\" onclick=\"details('"+result.id+"','0')\">Detail</a> "
+															+ "<a class=\"btn btn-success btn-sm\" onclick=\"details('"+result.id+"','1')\">Edit</a> "
+															+ "<a class=\"btn btn-danger btn-sm\"  onclick=\"deleteConfirmation('"+result.id+"') \">Delete</a> "
+													+  '</td>' +
+													
+													'</tr>';
+
+											$('#assetTable tbody').append(
+													assetRow);
+										});
+
+										/* $( "#assetTable tbody tr:odd" ).addClass("info");
+										$( "#assetTable tbody tr:even" ).addClass("success"); */
+									} else {
+										$('.table tbody')
+												.html(
+														"<tr><td colspan='9' align='center'>No Data</td></tr>");
+										disableAction();
+									}
+								} else {
+									$('.loader').fadeOut();
+									$('.table tbody')
+											.html(
+													"<tr><td colspan='9' align='center'>No Data</td></tr>");
+									disableAction();
+								}
+							},
+							error : function(e) {
+								alert("ERROR: ", e);
+								console.log("ERROR: ", e);
+							}
+						});
+				
+			}
+			
+			// ]]>
+		</script>
+			<div class="box-body">
+				<div class="row bottom5">
+					<div class="col-md-3">
+						<!-- <h3 class="box-title">Lists</h3> -->
+						<table>
+							<tr>
+								<td style="width: 40px;"><button
+										class="btn btn-default btn-sm" onclick="prevPage()"
+										id="btnPrevPage">
+										<i class="fa fa-chevron-left"></i>
+									</button></td>
+								<td style="width: 20px;"><input type="text" value="1"
+									class="form-control input-sm" maxlength="10" id="currentPage"
+									style="width: 50px; text-align: right;" /></td>
+								<td id="totalPage"></td>
+								<td style="width: 40px;"><button
+										class="btn btn-default pull-right btn-sm" onclick="nextPage()"
+										id="btnNextPage">
+										<i class="fa fa-chevron-right"></i>
+									</button></td>
+							</tr>
+						</table>
+					</div>
+					<table>
+						<tr>
+							<th>
+								<div class="col-md-3" style="width: auto;">
+									<div class="input-group">
+										<input class="form-control input-sm pull-right" type="text"
+											placeholder="Search" name="search" id="search" />
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default btn-flat btn-sm"
+												id="btnSearch" data-toggle="tooltip" title="Cari">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</th>
+							<th>
+								<div class="col-md-3" style="width: auto;">
+									<div class="input-group">
+										<a th:href="@{/api/instrument/new}" class="btn btn-primary btn-sm"
+											role="button" aria-disabled="true">Add Instrument</a>
+									</div>
+								</div>
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div style="margin-bottom: 5px;"></div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table id="assetTable"
+								class="table table-hover table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Name</th>
+										<th>Created By</th>
+										<th>Created Date</th>
+										<th>Modified By</th>
+										<th>Modified Date</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			//<![CDATA[
+			refreshPage();
+			$('#currentPage').keyup(function(ev) {
+				if (ev.keyCode == 13) {
+					var curPage = parseInt($(this).val());
+					if (curPage < 0)
+						curPage = 1;
+
+					if (curPage <= totalPage) {
+						$('#currentPage').prop('disabled', true);
+						$('#currentPage').val(curPage);
+						page = curPage;
+						refreshPage();
+					} else {
+						$('#currentPage').prop('disabled', true);
+						page = 1;
+						$('#currentPage').val(page);
+						refreshPage();
+					}
+				}
+			});
+			$('#search').keyup(function(ev) {
+				if (ev.keyCode == 13) {
+					page = 1;
+					search = $(this).val();
+					refreshPage();
+				}
+			});
+
+			$('#btnSearch').click(function() {
+				page = 1;
+				search = $('#search').val();
+				refreshPage();
+			});
+
+
+			// ]]>
+		</script>
+	</div>
+	
+</body>
+
+</html>

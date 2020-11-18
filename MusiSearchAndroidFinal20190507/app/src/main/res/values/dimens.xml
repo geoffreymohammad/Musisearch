@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_login">300dp</dimen>
+    <dimen name="general_padding">20dp</dimen>
+    <dimen name="padding_status">10dp</dimen>
+    <dimen name="margin_profile_top">30dp</dimen>
+    <dimen name="margin_general">40dp</dimen>
+    <dimen name="musisi_start">5dp</dimen>
+    <dimen name="musisi_end">5dp</dimen>
+    <dimen name="musisi_devide">100dp</dimen>
+    <dimen name="textPilihan">12sp</dimen>
+    <dimen name="textSpinner">15sp</dimen>
+    <dimen name="textStatus">16sp</dimen>
+    <dimen name="margin_bottom_profile">20dp</dimen>
+    <dimen name="textNameProfile">25sp</dimen>
+    <dimen name="textAddStatus">20sp</dimen>
+    <dimen name="textNameStatus">14sp</dimen>
+    <dimen name="textDateStatus">13sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>

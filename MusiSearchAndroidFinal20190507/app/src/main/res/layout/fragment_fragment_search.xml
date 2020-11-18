@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.search.FragmentSearch">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_marginBottom="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/general_padding">
+
+                <!-- Genre Label -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_dj" />
+
+                    <Spinner
+                        android:id="@+id/spinnerGenre"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="10dp"
+                        android:popupBackground="@color/colorGrey"
+                        android:background="@drawable/custom_spinner"
+                        android:spinnerMode="dropdown" />
+
+                </LinearLayout>
+                <!-- First Intrument Label -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_guitar" />
+
+                    <Spinner
+                        android:id="@+id/spinnerInstrument1"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="2dp"
+                        android:popupBackground="@color/colorGrey"
+                        android:background="@drawable/custom_spinner"
+                        android:spinnerMode="dropdown" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/region"
+                    android:textColor="@color/colorWhite" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/radio_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/all"
+                        android:textColor="@color/colorWhite" />
+
+                    <RadioButton
+                        android:id="@+id/radio_jakbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jakarta_barat"
+                        android:textColor="@color/colorWhite" />
+
+                    <RadioButton
+                        android:id="@+id/radio_jaktim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jakarta_timur"
+                        android:textColor="@color/colorWhite" />
+
+                    <RadioButton
+                        android:id="@+id/radio_jakpus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jakarta_pusat"
+                        android:textColor="@color/colorWhite" />
+
+                    <RadioButton
+                        android:id="@+id/radio_jakut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jakarta_utara"
+                        android:textColor="@color/colorWhite" />
+
+                    <RadioButton
+                        android:id="@+id/radio_jaksel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jakarta_selatan"
+                        android:textColor="@color/colorWhite" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ripple_button_login"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/search"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
+

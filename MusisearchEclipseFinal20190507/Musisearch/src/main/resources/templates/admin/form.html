@@ -1,0 +1,147 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Detail Admin</title>
+</head>
+<body>
+	<section layout:fragment="header">
+		<h1 id="header_h1">Admin</h1>
+		<ol class="breadcrumb">
+			<li><a th:href="@{/assetsp/list?pageNumber=1}"><i
+					class="fa fa-dashboard"></i> List Admin</a></li>
+			<li id="header_li" class="active">Detail</li>
+		</ol>
+	</section>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-12">
+				<div style="margin-bottom: 10px;">
+					<button type="button" class="btn btn-warning btn-sm btn-flat"
+						id="btnBack" onclick='javascript:window.history.back()'>
+						<i class="fa fa-arrow-left"></i> Back
+					</button>
+					<button class="btn btn-primary btn-flat btn-sm"
+						onclick="updateAdmin()" id="btnSave">
+						<i class="fa fa-paper-plane"></i> Save
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title">Detail Admin</h3>
+			</div>
+
+			<div class="row">
+				
+				<!-- <div class="loader"></div> -->
+				<div class="col-md-8">
+					<input type="hidden" id="idUser" th:value="${idUser}" />
+					<form data-toggle="validator" role="form" th:object="${admin}" th:action="@{/api/admin/update}"
+						class="form-horizontal" method="post">
+						<div class="box-body">
+							<input type="hidden" th:field="${admin.object.id}" />
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Name</label>
+								<div class="col-sm-6 text-left">
+									<input type="text" th:field="${admin.object.nama}"
+										placeholder="Name" class="form-control"
+										th:required="required" />
+								</div>
+								<div class="help-block with-errors"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Email</label>
+								<div class="col-sm-6 text-left">
+									<input type="text" th:field="${admin.object.email}"
+										placeholder="Email" class="form-control"
+										th:required="required"/>
+								</div>
+								<div class="help-block with-errors"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Created By</label>
+								<div class="col-sm-6 text-left">
+									<input type="text"
+										th:field="${admin.object.createdByName}"
+										placeholder="Created By Name" class="form-control" disabled=""/>
+								</div>
+								<div class="help-block with-errors"></div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Modified By</label>
+								<div class="col-sm-6 text-left">
+									<input type="text" th:field="${admin.object.modifiedByName}"
+										placeholder="Modified By Name" class="form-control"
+										th:required="required" disabled=""/>
+								</div>
+								<div class="help-block with-errors"></div>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<script type="text/javascript">
+					//<![CDATA[
+					const urlParams = new URLSearchParams(window.location.search);
+					const inAdminId = urlParams.get('inAdminId');
+					const isEdit = urlParams.get('isEdit');
+					var urlPage = urlGlobal;
+					if (isEdit == 0){
+						document.getElementById("header_h1").innerHTML="Detail Admin";
+						document.getElementById("header_li").innerHTML="Detail";
+						document.getElementById("object.nama").disabled = true;
+						document.getElementById("object.email").disabled = true;
+						document.getElementById("btnSave").style.display = 'none';
+					}else{
+						document.getElementById("header_h1").innerHTML="Edit Admin";
+						document.getElementById("header_li").innerHTML="Edit";
+					}
+					function updateAdmin(){
+				    	var data;
+				    	var inNama,inEmail,inId;
+				    	data = {
+				    			inNama : document.getElementById('object.nama').value,
+				    			inEmail : document.getElementById('object.email').value,
+				    			inId : inAdminId
+				    	};
+				    	$
+				    		.ajax({
+				    			type: "POST",
+				    			cache: false,
+				    			url: urlPage + "api/admin/update",
+				    			dataType: "JSON",
+				    			data: data,
+				    		beforeSend: function() {
+				    				$('.loader').fadeIn();
+				    			},
+				    			complete: function() {
+				    				$('.loader').fadeOut();
+				    			},   
+				    			success: function(data)  {
+				    				if (data.errorResult == false) {
+				    					window.location.replace(urlPage + "/api/admin/list?pageNumber=1");
+				    					//javascript:window.history.back();
+				    				} else {
+				    					$('.loader').fadeOut();
+				    				}
+				    			},
+					    		error : function(e) {
+									alert("ERROR: ", e);
+									console.log("ERROR: ", e);
+					    		}
+				   		});
+					}
+					// ]]>
+				</script>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Add Genre</title>
+</head>
+<body>
+	<section layout:fragment="header">
+		<h1>Add Genre</h1>
+	</section>
+	<div layout:fragment="content">
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title">Input Data</h3>
+			</div>
+			<form data-toggle="validator" role="form" th:object="${genre}"
+				class="form-horizontal" th:action="@{/api/genre/save}" method="post">
+				<div class="box-body">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-4 text-left">
+							<input type="text" th:field="${genre.nama}" placeholder="Name"
+                                               class="form-control" th:required="required"/>
+						</div>
+						<div class="help-block with-errors"></div>
+					</div>					
+				</div>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+		  	//<![CDATA[
+		  		
+			// ]]>
+			</script>
+	</div>
+</body>
+</html>

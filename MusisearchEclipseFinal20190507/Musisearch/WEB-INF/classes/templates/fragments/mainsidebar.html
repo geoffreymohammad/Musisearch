@@ -1,0 +1,47 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+ 
+        <li th:class="${activeTab} eq 'adminList' ? 'active' : null">
+            <a th:href="@{/api/admin/list?pageNumber=1}">
+                <i class="fa fa-cube"></i> <span>List Admin</span>
+            </a>
+        </li>
+        <li th:class="${activeTab} eq 'genreList' ? 'active' : null">
+            <a th:href="@{/api/genre/list?pageNumber=1}">
+                <i class="fa fa-cube"></i> <span>List Genre</span>
+            </a>
+        </li>
+        
+        <li th:class="${activeTab} eq 'instrumentList' ? 'active' : null">
+            <a th:href="@{/api/instrument/list?pageNumber=1}">
+                <i class="fa fa-cube"></i> <span>List Instrument</span>
+            </a>
+        </li>
+        
+        <li th:class="${activeTab} eq 'regionList' ? 'active' : null">
+            <a th:href="@{/api/region/list?pageNumber=1}">
+                <i class="fa fa-cube"></i> <span>List Region</span>
+            </a>
+        </li>
+        <li th:class="${activeTab} eq 'musisiList' ? 'active' : null">
+            <a th:href="@{/api/musisi/list?pageNumber=1}">
+                <i class="fa fa-cube"></i> <span>List Musisi</span>
+            </a>
+        </li>
+        
+        
+        <!-- <li th:class="${activeTab} eq 'movement_list' ? 'active' : null">
+            <a th:href="@{/api/admin/list}">
+                <i class="fa fa-cube"></i> <span>Admin</span>
+            </a>
+        </li> -->
+        <li >
+            <a th:href="@{/logout}">
+                <i class="fa fa-unlock"></i> <span>Logout</span>
+            </a>
+        </li>
+    </ul>
+</section>
+<!-- /.sidebar -->

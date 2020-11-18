@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey"
+    tools:context=".ui.register.Step1Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/general_padding">
+
+                <!-- Fullname Label -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_identification" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/fullname"
+                        android:textColorHint="@color/colorWhite">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/editFullName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="true"
+                            android:inputType="text"
+                            android:nextFocusDown="@id/editEmail"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp"
+                            tools:ignore="Autofill" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+                <!-- Email Label -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_envelope_opened" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/email"
+                        android:textColorHint="@color/colorWhite">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/editEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="true"
+                            android:inputType="textEmailAddress"
+                            android:nextFocusDown="@id/editPass"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp"
+                            tools:ignore="Autofill" />
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Telp. Label -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_phone_call" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputTelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/telp_number"
+                        android:textColorHint="@color/colorWhite">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/editTelp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusableInTouchMode="true"
+                            android:inputType="number"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp"
+                            tools:ignore="Autofill" />
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <!-- Date Label -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_gift_box" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/date_of_birth"
+                        android:textColorHint="@color/colorWhite">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/editDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="true"
+                            android:inputType="date"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp"
+                            tools:ignore="Autofill" />
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <!-- Gender Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/gender"
+                    android:textColor="@color/colorWhite" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="@string/male"
+                        android:textColor="@color/colorWhite" />
+
+                    <RadioButton
+                        android:id="@+id/radio_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="@string/female"
+                        android:textColor="@color/colorWhite" />
+                </RadioGroup>
+
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ripple_button_login"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/next"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

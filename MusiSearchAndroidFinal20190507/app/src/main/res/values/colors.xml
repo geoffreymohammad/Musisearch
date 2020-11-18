@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#282828</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#e8a556</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite80">#dedcdc</color>
+    <color name="colorBlack">#000000</color>
+    <color name="black_25_transparent">#40999797</color>
+    <color name="colorBlackTransparent">#A6A3A1A1</color>
+    <color name="colorGrey">#3c3c3c</color>
+    <color name="colorDarkGreen">#58822F</color>
+    <color name="colorFruitSalad">#5C964A</color>
+    <color name="colorForestGreen">#3F7B2C</color>
+    <color name="colorMossGreen">#C5DFAC</color>
+    <color name="colorAsparagus">#759E4E</color>
+    <color name="colorBayLeaf">#85AD9A</color>
+    <color name="colorCardView">#f7f7f7</color>
+    <color name="colorIndivateTab">#FFFFFF</color>
+    <color name="colorPatina">#5D9379</color>
+    <color name="colorPineGlad">#C1CC82</color>
+    <color name="colorOliveGreen">#9EAB54</color>
+    <color name="colorAmazon">#3D7B5D</color>
+    <color name="colorAmazonOld">#124E31</color>
+    <color name="colorGreenPea">#246546</color>
+    <color name="text_grey">#696868</color>
+    <color name="text_grey_old">#33ac71</color>
+    <color name="colorIjo">#673e1f</color>
+    <color name="color_rect">#4f801f</color>
+    <color name="color_in">#4f811e</color>
+    <color name="color_out">#d80303</color>
+    <color name="color_angka">#47632b</color>
+    <color name="colorOrange">#e8a556</color>
+    <color name="colorRedGoogle">#DC4E41</color>
+    <color name="transparent">#00000000</color>
+    <color name="grey_200">#EEEEEE</color>
+    <color name="grey_500">#a4a4a4</color>
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_800">#212121</color>
+
+</resources>
